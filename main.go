@@ -17,11 +17,13 @@ func main() {
 	err := godotenv.Load()
 
 	if err != nil {
+		log.Fatal(err)
 		log.Fatal("Could not load .env file")
 	}
 
 	app := fiber.New(fiber.Config{
-		Prefork: true,
+		Prefork:               true,
+		DisableStartupMessage: true,
 	})
 
 	app.Use(limiter.New())
