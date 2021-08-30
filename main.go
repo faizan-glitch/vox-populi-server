@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/faizan-glitch/vox-populi/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -31,9 +32,7 @@ func main() {
 		return c.SendString("pong")
 	})
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello World")
-	})
+	routes.Register(app)
 
 	PORT := fmt.Sprintf(":%s", os.Getenv("PORT"))
 
