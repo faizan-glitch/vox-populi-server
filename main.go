@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 )
 
@@ -20,6 +22,10 @@ func main() {
 	app := fiber.New(fiber.Config{
 		Prefork: true,
 	})
+
+	app.Use(limiter.New())
+
+	app.Use(logger.New())
 
 	app.Get("/ping", func(c *fiber.Ctx) error {
 		return c.SendString("pong")
